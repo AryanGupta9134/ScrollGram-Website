@@ -7,8 +7,7 @@ const fetchProducts = async () => {
   return data.products;
 };
 
-
-const ProductsList = ({productSearch, categoryValue}) => {
+const ProductsList = ({ productSearch, categoryValue }) => {
   const {
     data: products = [],
     isLoading,
@@ -19,22 +18,25 @@ const ProductsList = ({productSearch, categoryValue}) => {
   });
 
   const queryClient = useQueryClient();
+
   const removeProduct = (productId) => {
     queryClient.setQueryData(["products"], (oldProducts = []) =>
       oldProducts.filter((product) => product.id !== productId)
     );
   };
 
-  const filteredProducts = products.filter((product) => {
-  const categoryMatch =
-    categoryValue === "All" || product.category === categoryValue;
+  const filteredProducts = (products || []).filter((product) => {
+    if (!product) return false; // skip null/undefined
+    const categoryMatch =
+      categoryValue === "All" || product.category === categoryValue;
 
-  const searchMatch =
-    productSearch.trim() === "" ||
-    product.title.toLowerCase().includes(productSearch.toLowerCase());
+    const searchMatch =
+      productSearch.trim() === "" ||
+      (product.title &&
+        product.title.toLowerCase().includes(productSearch.toLowerCase()));
 
-  return categoryMatch && searchMatch;
-});
+    return categoryMatch && searchMatch;
+  });
 
   if (isLoading) {
     return (
@@ -52,10 +54,8 @@ const ProductsList = ({productSearch, categoryValue}) => {
     );
   }
 
-
-
   return (
-    <div className="p-6 max-w-6xl mx-auto ">
+    <div className="p-6 max-w-6xl mx-auto">
       <div className="space-y-8 pb-12">
         {filteredProducts.map((product) => (
           <div
@@ -105,8 +105,10 @@ const ProductsList = ({productSearch, categoryValue}) => {
                   <button className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium">
                     Add to Cart
                   </button>
-                  <button className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
-                    onClick={() => removeProduct(product.id)}>
+                  <button
+                    className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
+                    onClick={() => removeProduct(product.id)}
+                  >
                     Remove Product
                   </button>
                 </div>
@@ -116,7 +118,6 @@ const ProductsList = ({productSearch, categoryValue}) => {
         ))}
       </div>
 
-      {/* Optional: Load more indicator */}
       {products.length === 0 && (
         <p className="text-center text-gray-500 py-12">No products found.</p>
       )}

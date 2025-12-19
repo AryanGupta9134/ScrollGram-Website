@@ -6,8 +6,16 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(false);
   const [fName, setfName] = useState("");
   const [lName, setlName] = useState("");
-
   const [userEmail, setUserEmail] = useState("");
+  const [productAddFormData, setProductAddFormData] = useState({
+    title: "",
+    description: "",
+    price: "",
+    category: "",
+    brand: "",
+    thumbnail: "",
+  });
+
 
   return (
     <AuthContext.Provider
@@ -20,6 +28,8 @@ const AuthProvider = ({ children }) => {
         setUserEmail,
         lName,
         setlName,
+        productAddFormData,
+        setProductAddFormData,
       }}
     >
       {children}

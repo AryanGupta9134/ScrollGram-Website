@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../ui/Loader";
 
 const fetchProducts = async () => {
@@ -17,6 +17,13 @@ const ProductsList = ({productSearch, categoryValue}) => {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  const queryClient = useQueryClient();
+  const removeProduct = (productId) => {
+    queryClient.setQueryData(["products"], (oldProducts = []) =>
+      oldProducts.filter((product) => product.id !== productId)
+    );
+  };
 
   const filteredProducts = products.filter((product) => {
   const categoryMatch =
@@ -98,7 +105,8 @@ const ProductsList = ({productSearch, categoryValue}) => {
                   <button className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium">
                     Add to Cart
                   </button>
-                  <button className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition">
+                  <button className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
+                    onClick={() => removeProduct(product.id)}>
                     Remove Product
                   </button>
                 </div>

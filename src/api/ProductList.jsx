@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../ui/Loader";
 
 const fetchProducts = async () => {
   const res = await fetch("https://dummyjson.com/products");
@@ -30,15 +31,15 @@ const ProductsList = ({productSearch, categoryValue}) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-gray-400 text-lg">Loading products...</p>
+      <div className="flex justify-center min-h-screen w-full">
+        <Loader />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex justify-center min-h-screen w-full items-center">
         <p className="text-red-400 text-lg">{error.message}</p>
       </div>
     );

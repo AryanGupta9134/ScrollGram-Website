@@ -1,16 +1,45 @@
-# React + Vite
+# ScrollGram 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ScrollGram is a frontend-only Instagram-like product scrolling website where users can endlessly scroll through products. It focuses on smooth UX, infinite scrolling, and modern React practices using dummy API data.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Infinite product scroll (loops back to top when data ends)
+- Product data fetched from a dummy API
+- CRUD operations on products (frontend only)
+- Basic user authentication (UI-level)
+- Smooth, Instagram-style scrolling experience
+- State & data management using React Query
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- React Query (TanStack Query)
+- JavaScript (ES6+)
+- CSS / Tailwind CSS
+- Dummy REST API
 
-## Expanding the ESLint configuration
+## 📌 Project Scope
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Frontend-only application
+- No real backend or database
+- Focused on UI/UX, state management, and performance
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/AryanGupta9134/ScrollGram-Website.git
+cd ScrollGram-Website
+npm install
+npm start
+```
+
+## 🎯 Purpose
+
+This project was built to practice:
+
+- Infinite scrolling logic
+- API handling
+- CRUD operations without backend
+- Modern frontend architecture
+

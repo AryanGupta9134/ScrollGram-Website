@@ -1,5 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../ui/Loader";
+import { FiEdit3 } from "react-icons/fi";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
 
 const fetchProducts = async () => {
   const res = await fetch("https://dummyjson.com/products");
@@ -8,6 +11,8 @@ const fetchProducts = async () => {
 };
 
 const ProductsList = ({ productSearch, categoryValue }) => {
+  const { setUpdateProduct } = useContext(AuthContext);
+
   const {
     data: products = [],
     isLoading,
@@ -56,13 +61,13 @@ const ProductsList = ({ productSearch, categoryValue }) => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <div className="space-y-8 pb-12">
+      <div className="space-y-8">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
             className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-700"
           >
-            <div className="flex flex-col h-full md:flex-row">
+            <div className="flex flex-col md:flex-row">
               {/* Product Image */}
               <div className="md:w-96 h-80 md:h-auto">
                 <img
@@ -73,8 +78,10 @@ const ProductsList = ({ productSearch, categoryValue }) => {
               </div>
 
               {/* Product Details */}
-              <div className="flex-1 p-8">
+              <div className="flex flex-col p-8 w-full">
+                {/* TOP ROW */}
                 <div className="flex justify-between items-start mb-4">
+                  {/* Left */}
                   <div>
                     <h3 className="text-2xl font-bold text-gray-100">
                       {product.title}
@@ -83,6 +90,8 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                       by {product.brand || "Unknown Brand"}
                     </p>
                   </div>
+
+                  {/* RIGHT TOP - Category */}
                   <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs font-semibold rounded-full border border-blue-800">
                     {product.category}
                   </span>
@@ -100,16 +109,28 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                   {product.description}
                 </p>
 
-                {/* Actions */}
-                <div className="flex gap-3">
-                  <button className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium">
-                    Add to Cart
-                  </button>
+                {/* BOTTOM ROW */}
+                <div className="flex justify-between items-center mt-auto">
+                  {/* LEFT BOTTOM - Actions */}
+                  <div className="flex gap-4">
+                    <button className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium">
+                      Add to Cart
+                    </button>
+
+                    <button
+                      className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
+                      onClick={() => removeProduct(product.id)}
+                    >
+                      Remove Product
+                    </button>
+                  </div>
+
+                  {/* RIGHT BOTTOM - Edit */}
                   <button
-                    className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
-                    onClick={() => removeProduct(product.id)}
+                    className="border border-blue-500 p-2 rounded-full hover:border-[#4DF2C0] transition text-blue-500 hover:text-[#4DF2C0]"
+                    onClick={() => setUpdateProduct(true)}
                   >
-                    Remove Product
+                    <FiEdit3 className="text-xl" />
                   </button>
                 </div>
               </div>

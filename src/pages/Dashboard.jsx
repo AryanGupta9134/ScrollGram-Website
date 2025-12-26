@@ -22,8 +22,9 @@ const Dashboard = () => {
   const [addProductOn, setAddProductOn] = useState(false);
   const [categoryValue, setCategoryValue] = useState("All");
   const [productSearch, setProductSearch] = useState("");
-  const { fName, lName, user, setUser } = useContext(AuthContext);
-  
+  const { fName, lName, user, setUser, updateProduct, setUpdateProduct } =
+    useContext(AuthContext);
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const handleLogout = () => {
@@ -104,6 +105,7 @@ const Dashboard = () => {
             addProduct={addProduct} // directly pass it
           />
         )}
+        {updateProduct ? <AddProductForm closeForm={() => setUpdateProduct(false)} /> : null}
         <div className="p-5 border-b border-gray-800 flex justify-between">
           <div className="flex items-center gap-4 flex-wrap">
             <select

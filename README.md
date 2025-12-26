@@ -43,3 +43,7 @@ This project was built to practice:
 - CRUD operations without backend
 - Modern frontend architecture
 
+## External Packages
+
+For UI - Styles Components(Uiverse.io)
+For image upload button - ..

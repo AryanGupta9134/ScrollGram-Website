@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
     brand: "",
     thumbnail: "",
   });
+  const [updateProduct, setUpdateProduct] = useState(false);
 
 
   return (
@@ -30,6 +31,8 @@ const AuthProvider = ({ children }) => {
         setlName,
         productAddFormData,
         setProductAddFormData,
+        updateProduct,
+        setUpdateProduct,
       }}
     >
       {children}

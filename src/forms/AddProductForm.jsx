@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 
 const AddProductForm = ({ closeForm, addProduct }) => {
-  const { productAddFormData, setProductAddFormData } = useContext(AuthContext);
+  const { productAddFormData, setProductAddFormData, updateProduct } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
         className="w-full max-w-lg bg-gray-900 border border-gray-700 rounded-2xl p-6 space-y-5"
       >
         <h2 className="text-2xl font-bold text-white text-center">
-          Add New Product
+          {updateProduct ? "Update Product" : "Add New Product"}
         </h2>
 
         <input

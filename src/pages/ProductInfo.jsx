@@ -55,7 +55,7 @@ const ProductInfo = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-gray-800 border border-gray-700 rounded-2xl p-6">
           {/* IMAGE GALLERY */}
           <div>
-            <div className="h-[420px] rounded-xl overflow-hidden border border-gray-700 mb-4">
+            <div className="h-105 rounded-xl overflow-hidden border border-gray-700 mb-4">
               <img
                 src={product.images[activeImage]}
                 alt={product.title}

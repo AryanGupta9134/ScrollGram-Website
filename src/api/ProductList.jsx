@@ -13,8 +13,13 @@ const fetchProducts = async () => {
 };
 
 const ProductsList = ({ productSearch, categoryValue }) => {
-  const { setUpdateProduct, setEditingProduct, addToWishlist, wishlist } =
-    useContext(AuthContext);
+  const {
+    setUpdateProduct,
+    setEditingProduct,
+    addToWishlist,
+    wishlist,
+    addToCart,
+  } = useContext(AuthContext);
 
   const {
     data: products = [],
@@ -125,7 +130,13 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                 <div className="flex justify-between items-center mt-auto">
                   {/* LEFT BOTTOM - Actions */}
                   <div className="flex gap-4">
-                    <button className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium">
+                    <button
+                      className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                    >
                       Add to Cart
                     </button>
 

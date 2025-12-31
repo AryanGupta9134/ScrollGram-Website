@@ -22,8 +22,16 @@ const Dashboard = () => {
   const [addProductOn, setAddProductOn] = useState(false);
   const [categoryValue, setCategoryValue] = useState("All");
   const [productSearch, setProductSearch] = useState("");
-  const { fName, lName, user, setUser, updateProduct, setUpdateProduct } =
-    useContext(AuthContext);
+  const {
+    fName,
+    lName,
+    user,
+    setUser,
+    updateProduct,
+    setUpdateProduct,
+    cart,
+    wishlist,
+  } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -56,14 +64,38 @@ const Dashboard = () => {
           <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 text-white w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
             <RiShoppingBag2Fill /> Products
           </button>
-          <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
-            <FaShoppingCart /> Cart
-          </button>   
           <button
-            className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]"
-            onClick={() => navigate("/wishlist")}
+            onClick={() => navigate("/cart")}
+            className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0] transition"
           >
-            <FaHeart /> Wishlist
+            <FaShoppingCart className="text-xl" />
+
+            <span className="relative flex items-center gap-2">
+              Cart
+              {/* COUNT BADGE */}
+              {cart.length > 0 && (
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#4DF2C0] text-black text-xs font-semibold">
+                  {cart.length > 99 ? "99+" : cart.length}
+                </span>
+              )}
+            </span>
+          </button>
+
+          <button
+            onClick={() => navigate("/wishlist")}
+            className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0] transition"
+          >
+            <FaHeart className="text-xl" />
+
+            <span className="relative flex items-center gap-2">
+              Wishlist
+              {/* COUNT BADGE */}
+              {wishlist.length > 0 && (
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-red-500 text-white text-xs font-semibold">
+                  {wishlist.length > 99 ? "99+" : wishlist.length}
+                </span>
+              )}
+            </span>
           </button>
         </div>
 

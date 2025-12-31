@@ -5,6 +5,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import LogIn from "./forms/LogIn";
 import ProductInfo from "./pages/ProductInfo";
 import WishList from "./pages/WishList";
+import Cart from "./pages/Cart";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/product/:id" element={<ProductInfo />} />
         <Route path="/wishlist" element={<WishList />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );

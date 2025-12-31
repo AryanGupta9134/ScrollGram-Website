@@ -11,7 +11,7 @@ const fetchProducts = async () => {
 };
 
 const ProductsList = ({ productSearch, categoryValue }) => {
-  const { setUpdateProduct } = useContext(AuthContext);
+  const { setUpdateProduct, setEditingProduct } = useContext(AuthContext);
 
   const {
     data: products = [],
@@ -57,6 +57,11 @@ const ProductsList = ({ productSearch, categoryValue }) => {
         <p className="text-red-400 text-lg">{error.message}</p>
       </div>
     );
+  }
+
+  const handleEditProduct = (product) => {
+    setUpdateProduct(true);
+    setEditingProduct(product);
   }
 
   return (
@@ -128,7 +133,7 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                   {/* RIGHT BOTTOM - Edit */}
                   <button
                     className="border border-blue-500 p-2 rounded-full hover:border-[#4DF2C0] transition text-blue-500 hover:text-[#4DF2C0]"
-                    onClick={() => setUpdateProduct(true)}
+                    onClick={() => handleEditProduct(product)}
                   >
                     <FiEdit3 className="text-xl" />
                   </button>

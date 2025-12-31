@@ -1,8 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AddProductForm = ({ closeForm, addProduct }) => {
-  const { productAddFormData, setProductAddFormData, updateProduct } = useContext(AuthContext);
+  const {
+    productAddFormData,
+    setProductAddFormData,
+    updateProduct,
+    editingProduct,
+    setUpdateProduct,
+    setEditingProduct,
+  } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -12,22 +20,41 @@ const AddProductForm = ({ closeForm, addProduct }) => {
     }));
   };
 
+  useEffect(() => {
+    if (updateProduct && editingProduct) {
+      setProductAddFormData({
+        title: editingProduct.title,
+        description: editingProduct.description,
+        price: editingProduct.price,
+        category: editingProduct.category,
+        brand: editingProduct.brand,
+        thumbnail: editingProduct.thumbnail,
+      });
+    }
+  }, [updateProduct, editingProduct]);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const newProduct = {
-      id: Date.now(),
-      title: productAddFormData.title || "Untitled",
-      description: productAddFormData.description || "",
-      price: productAddFormData.price || 0,
-      category: productAddFormData.category || "uncategorized",
-      brand: productAddFormData.brand || "Unknown",
-      thumbnail:
-        productAddFormData.thumbnail || "https://via.placeholder.com/150",
-    };
+    if (updateProduct && editingProduct) {
+      // 🔁 UPDATE PRODUCT
+      queryClient.setQueryData(["products"], (oldProducts = []) =>
+        oldProducts.map((product) =>
+          product.id === editingProduct.id
+            ? { ...product, ...productAddFormData }
+            : product
+        )
+      );
+    } else {
+      // ➕ ADD PRODUCT
+      const newProduct = {
+        id: Date.now(),
+        ...productAddFormData,
+      };
+      addProduct(newProduct);
+    }
 
-    addProduct(newProduct);
-
+    // 🧹 RESET EVERYTHING
     setProductAddFormData({
       title: "",
       description: "",
@@ -37,8 +64,12 @@ const AddProductForm = ({ closeForm, addProduct }) => {
       thumbnail: "",
     });
 
+    setUpdateProduct(false);
+    setEditingProduct(null);
     closeForm();
   };
+
+  const queryClient = useQueryClient();
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4">

@@ -15,7 +15,12 @@ const AuthProvider = ({ children }) => {
     brand: "",
     thumbnail: "",
   });
+  // 🔹 Are we updating a product?
   const [updateProduct, setUpdateProduct] = useState(false);
+
+  // 🔹 WHICH product is being edited (IMPORTANT)
+  const [editingProduct, setEditingProduct] = useState(null);
+
 
 
   return (
@@ -33,6 +38,8 @@ const AuthProvider = ({ children }) => {
         setProductAddFormData,
         updateProduct,
         setUpdateProduct,
+        editingProduct,
+        setEditingProduct,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { FiEdit3 } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 const fetchProducts = async () => {
   const res = await fetch("https://dummyjson.com/products");
@@ -12,7 +13,8 @@ const fetchProducts = async () => {
 };
 
 const ProductsList = ({ productSearch, categoryValue }) => {
-  const { setUpdateProduct, setEditingProduct } = useContext(AuthContext);
+  const { setUpdateProduct, setEditingProduct, addToWishlist, wishlist } =
+    useContext(AuthContext);
 
   const {
     data: products = [],
@@ -64,7 +66,9 @@ const ProductsList = ({ productSearch, categoryValue }) => {
   const handleEditProduct = (product) => {
     setUpdateProduct(true);
     setEditingProduct(product);
-  }
+  };
+
+  const isInWishlist = (id) => wishlist.some((item) => item.id === id);
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -134,12 +138,28 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                   </div>
 
                   {/* RIGHT BOTTOM - Edit */}
-                  <button
-                    className="border border-blue-500 p-2 rounded-full hover:border-[#4DF2C0] transition text-blue-500 hover:text-[#4DF2C0]"
-                    onClick={() => handleEditProduct(product)}
-                  >
-                    <FiEdit3 className="text-xl" />
-                  </button>
+                  <div className="flex gap-4">
+                    <button
+                      className={`transition ${
+                        isInWishlist(product.id) ? "text-red-500" : "text-white"
+                      } hover:text-red-500`}
+                      onClick={(e) => {
+                        e.stopPropagation(); // 🔥 prevents unwanted navigation
+                        addToWishlist(product);
+                      }}
+                    >
+                      <FaHeart className="text-xl" />
+                    </button>
+                    <button
+                      className="border border-blue-500 p-2 rounded-full hover:border-[#4DF2C0] transition text-blue-500 hover:text-[#4DF2C0]"
+                      onClick={(e) => {
+                        e.stopPropagation(); // 🔥 prevents unwanted navigation
+                        handleEditProduct(product);
+                      }}
+                    >
+                      <FiEdit3 className="text-xl" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

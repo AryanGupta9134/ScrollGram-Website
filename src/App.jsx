@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import LogIn from "./forms/LogIn";
 import ProductInfo from "./pages/ProductInfo";
+import WishList from "./pages/WishList";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         />
         <Route path="/login" element={<LogIn />} />
         <Route path="/product/:id" element={<ProductInfo />} />
+        <Route path="/wishlist" element={<WishList />} />
       </Routes>
     </div>
   );

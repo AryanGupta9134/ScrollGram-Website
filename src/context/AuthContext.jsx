@@ -21,7 +21,22 @@ const AuthProvider = ({ children }) => {
   // 🔹 WHICH product is being edited (IMPORTANT)
   const [editingProduct, setEditingProduct] = useState(null);
 
+  // ✅ WISHLIST STATE
+  const [wishlist, setWishlist] = useState([]);
 
+  // ➕ Add to wishlist
+  const addToWishlist = (product) => {
+    setWishlist((prev) => {
+      const alreadyExists = prev.some((item) => item.id === product.id);
+      if (alreadyExists) return prev;
+      return [...prev, product];
+    });
+  };
+
+  // ❌ Remove from wishlist
+  const removeFromWishlist = (id) => {
+    setWishlist((prev) => prev.filter((item) => item.id !== id));
+  };
 
   return (
     <AuthContext.Provider
@@ -40,6 +55,9 @@ const AuthProvider = ({ children }) => {
         setUpdateProduct,
         editingProduct,
         setEditingProduct,
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
       }}
     >
       {children}

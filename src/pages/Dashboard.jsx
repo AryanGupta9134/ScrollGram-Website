@@ -53,13 +53,16 @@ const Dashboard = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full ">
-          <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
-            <FaShoppingCart /> Cart
-          </button>
           <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 text-white w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
             <RiShoppingBag2Fill /> Products
           </button>
           <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
+            <FaShoppingCart /> Cart
+          </button>   
+          <button
+            className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]"
+            onClick={() => navigate("/wishlist")}
+          >
             <FaHeart /> Wishlist
           </button>
         </div>
@@ -105,7 +108,9 @@ const Dashboard = () => {
             addProduct={addProduct} // directly pass it
           />
         )}
-        {updateProduct ? <AddProductForm closeForm={() => setUpdateProduct(false)} /> : null}
+        {updateProduct ? (
+          <AddProductForm closeForm={() => setUpdateProduct(false)} />
+        ) : null}
         <div className="p-5 border-b border-gray-800 flex justify-between">
           <div className="flex items-center gap-4 flex-wrap">
             <select

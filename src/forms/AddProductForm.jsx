@@ -31,7 +31,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
         thumbnail: editingProduct.thumbnail,
       });
     }
-  }, [updateProduct, editingProduct]);
+  }, [updateProduct, editingProduct, setProductAddFormData]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

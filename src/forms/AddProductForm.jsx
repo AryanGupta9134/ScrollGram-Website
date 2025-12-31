@@ -156,7 +156,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
             type="submit"
             className="px-6 py-2 rounded-lg bg-[#4DF2C0] text-black font-semibold hover:opacity-90"
           >
-            Add Product
+            {updateProduct ? "Update Product" : "Add New Product"}
           </button>
         </div>
       </form>

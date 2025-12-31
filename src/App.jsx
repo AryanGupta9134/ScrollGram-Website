@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import LogIn from "./forms/LogIn";
+import ProductInfo from "./pages/ProductInfo";
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
           }
         />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/product/:id" element={<ProductInfo />} />
       </Routes>
     </div>
   );

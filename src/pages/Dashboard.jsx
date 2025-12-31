@@ -53,14 +53,14 @@ const Dashboard = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full ">
+          <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
+            <FaShoppingCart /> Cart
+          </button>
           <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 text-white w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
             <RiShoppingBag2Fill /> Products
           </button>
           <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
-            <FaHeart /> Liked
-          </button>
-          <button className="p-4 text-lg rounded-lg flex items-center justify-center gap-3 w-full hover:bg-gray-800 hover:text-[#4DF2C0]">
-            <FaShoppingCart /> Cart
+            <FaHeart /> Wishlist
           </button>
         </div>
 

@@ -3,6 +3,7 @@ import Loader from "../ui/Loader";
 import { FiEdit3 } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const fetchProducts = async () => {
   const res = await fetch("https://dummyjson.com/products");
@@ -23,6 +24,7 @@ const ProductsList = ({ productSearch, categoryValue }) => {
   });
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const removeProduct = (productId) => {
     queryClient.setQueryData(["products"], (oldProducts = []) =>
@@ -71,6 +73,7 @@ const ProductsList = ({ productSearch, categoryValue }) => {
           <div
             key={product.id}
             className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-700"
+            onClick={() => navigate(`/product/${product.id}`)}
           >
             <div className="flex flex-col md:flex-row">
               {/* Product Image */}

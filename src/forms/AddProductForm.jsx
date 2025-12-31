@@ -48,7 +48,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
     } else {
       // ➕ ADD PRODUCT
       const newProduct = {
-        id: Date.now(),
+        id: Crypto.randomUUID(),
         ...productAddFormData,
       };
       addProduct(newProduct);

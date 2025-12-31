@@ -127,7 +127,7 @@ const Dashboard = () => {
       </div>
 
       {/* Right Content */}
-      <div className="w-8/10 h-screen flex flex-col">
+      <div className="w-8/10 h-screen flex flex-col ">
         {editOn && (
           <div className="absolute inset-0 z-50 bg-gray-900/95 backdrop-blur-sm flex items-center justify-center">
             <ProfileEditForm closeForm={() => setEditOn(false)} />

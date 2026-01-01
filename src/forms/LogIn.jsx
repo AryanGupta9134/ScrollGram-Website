@@ -9,9 +9,31 @@ const LogIn = () => {
   const navigate = useNavigate();
   const handleUserLogin = (e) => {
     e.preventDefault();
-    setUser(true);
+
+    // 🛑 BASIC VALIDATION
+    if (!fName.trim() || !lName.trim() || !userEmail.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    // 🛑 EMAIL FORMAT CHECK
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(userEmail)) {
+      alert("Please enter a valid email");
+      return;
+    }
+
+    // ✅ AUTH SUCCESS
+    setUser({
+      isAuthenticated: true,
+      fName,
+      lName,
+      email: userEmail,
+    });
+
     navigate("/dashboard");
   };
+
   return (
     <section className="w-full h-screen flex bg-black">
       <Navbar />
@@ -43,7 +65,7 @@ const LogIn = () => {
           </h3>
 
           {/* Form */}
-          <form className="space-y-2">
+          <form onSubmit={handleUserLogin} className="space-y-2">
             <div className="flex gap-3">
               <div>
                 <label className="text-sm text-gray-300">First Name</label>
@@ -79,7 +101,6 @@ const LogIn = () => {
 
             <button
               type="submit"
-              onClick={handleUserLogin}
               className="w-full bg-[#3A7BFF] text-white py-3 rounded-full font-semibold hover:bg-[#4DF2C0] transition shadow-lg mt-8"
             >
               Sign-In

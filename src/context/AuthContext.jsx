@@ -3,7 +3,13 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState({
+    isAuthenticated: false,
+    fName: "",
+    lName: "",
+    email: "",
+  });
+
   const [fName, setfName] = useState("");
   const [lName, setlName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -84,11 +90,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-  setCart((prevCart) =>
-    prevCart.filter((item) => item.id !== id)
-  );
-};
-
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
 
   return (
     <AuthContext.Provider

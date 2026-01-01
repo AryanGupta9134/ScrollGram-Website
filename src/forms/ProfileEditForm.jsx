@@ -1,11 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 
 const ProfileEditForm = ({ closeForm }) => {
-  const { fName, setfName, lName, setlName } = useContext(AuthContext);
+  const { fName, lName, setfName, setlName } = useContext(AuthContext);
+
+  // 🧠 LOCAL STATE (buffer)
+  const [firstName, setFirstName] = useState(fName);
+  const [lastName, setLastName] = useState(lName);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 🛑 VALIDATION
+    if (!firstName.trim() || !lastName.trim()) {
+      setError("Both first and last name are required");
+      return;
+    }
+
+    // ✅ SAVE TO CONTEXT ONLY ON SAVE
+    setfName(firstName.trim());
+    setlName(lastName.trim());
+
     closeForm();
   };
 
@@ -17,18 +33,22 @@ const ProfileEditForm = ({ closeForm }) => {
                    rounded-lg p-6 shadow-xl
                    flex flex-col gap-4"
       >
-        {/* Title */}
         <h2 className="text-xl font-semibold text-center text-[#4DF2C0]">
           Edit Profile
         </h2>
+
+        {/* ERROR */}
+        {error && (
+          <p className="text-red-400 text-sm text-center">{error}</p>
+        )}
 
         {/* First Name */}
         <div className="flex flex-col gap-1">
           <label className="text-sm text-gray-400">First Name</label>
           <input
             type="text"
-            value={fName}
-            onChange={(e) => setfName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             className="px-3 py-2 rounded-md bg-gray-900 text-white
                        border border-white/10
                        focus:outline-none focus:ring-1 focus:ring-[#4DF2C0]"
@@ -40,8 +60,8 @@ const ProfileEditForm = ({ closeForm }) => {
           <label className="text-sm text-gray-400">Last Name</label>
           <input
             type="text"
-            value={lName}
-            onChange={(e) => setlName(e.target.value)}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             className="px-3 py-2 rounded-md bg-gray-900 text-white
                        border border-white/10
                        focus:outline-none focus:ring-1 focus:ring-[#4DF2C0]"

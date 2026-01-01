@@ -49,6 +49,11 @@ const Dashboard = () => {
     ]);
   };
 
+  const fullName = [fName, lName]
+    .map((name) => name?.trim())
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div className="h-screen flex bg-gray-900 text-gray-100">
       {/* Left Sidebar */}
@@ -119,9 +124,7 @@ const Dashboard = () => {
 
           <div className="w-full p-4 rounded-lg flex items-center justify-center gap-3 cursor-pointer transition-all duration-200 hover:bg-gray-800 hover:text-[#4DF2C0]">
             <FaUser className="text-xl" />
-            <span className="text-lg">
-              {fName} {lName}
-            </span>
+            <span className="text-lg">{fullName}</span>
           </div>
         </div>
       </div>

@@ -143,7 +143,7 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                     <button
                       className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
                       onClick={(e) => {
-                        e.stopPropagation();
+                        e.stopPropagation(); // 🔥 prevents unwanted navigation
                         removeProduct(product.id);
                       }}
                     >

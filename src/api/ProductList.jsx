@@ -142,7 +142,10 @@ const ProductsList = ({ productSearch, categoryValue }) => {
 
                     <button
                       className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
-                      onClick={() => removeProduct(product.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeProduct(product.id);
+                      }}
                     >
                       Remove Product
                     </button>

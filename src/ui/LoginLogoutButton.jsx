@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 const LoginLogoutButton = () => {
   const navigate = useNavigate();
   const { setUser, user } = useContext(AuthContext);
-  
+
   return (
     <button
       onClick={() => (user ? setUser(false) : navigate("/login"))}

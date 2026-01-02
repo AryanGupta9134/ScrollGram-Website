@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 
 const ProfileEditForm = ({ closeForm }) => {
   const { fName, lName, setfName, setlName } = useContext(AuthContext);
@@ -38,9 +38,7 @@ const ProfileEditForm = ({ closeForm }) => {
         </h2>
 
         {/* ERROR */}
-        {error && (
-          <p className="text-red-400 text-sm text-center">{error}</p>
-        )}
+        {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
         {/* First Name */}
         <div className="flex flex-col gap-1">

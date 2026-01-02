@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { FaTrash, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

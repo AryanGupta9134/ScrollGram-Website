@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 
 const AddProductForm = ({ closeForm, addProduct }) => {

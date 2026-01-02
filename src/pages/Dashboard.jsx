@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 import { IoMdAdd } from "react-icons/io";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import ProfileEditForm from "../forms/ProfileEditForm";
 import ProductsList from "../api/ProductList";
 import AddProductForm from "../forms/AddProductForm";

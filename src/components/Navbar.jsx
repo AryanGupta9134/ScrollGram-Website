@@ -1,5 +1,5 @@
 import LoginLogoutButton from "../ui/LoginLogoutButton";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import Logo from "../ui/Logo";
 

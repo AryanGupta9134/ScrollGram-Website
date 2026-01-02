@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "../ui/Logo";
 import { MdLogout, MdMenu } from "react-icons/md";

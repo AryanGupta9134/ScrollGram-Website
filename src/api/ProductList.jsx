@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../ui/Loader";
 import { FiEdit3 } from "react-icons/fi";
 import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 

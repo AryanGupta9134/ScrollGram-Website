@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 
 const Home = () => {
@@ -60,8 +60,7 @@ const Home = () => {
           </div>
         </div>
 
-          <Footer/>
-
+        <Footer />
       </div>
     </>
   );

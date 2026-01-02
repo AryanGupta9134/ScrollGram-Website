@@ -34,132 +34,159 @@ const ProductInfo = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-900">
-        <p className="text-red-400">{error.message}</p>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-900 px-6 text-center">
+        <p className="text-red-400 text-lg mb-2">Failed to load product</p>
+        <p className="text-gray-500 text-sm">{error.message}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 px-6 py-8">
-      <div className="max-w-7xl mx-auto">
-        {/* 🔙 Back */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 mb-6 text-gray-400 hover:text-[#4DF2C0]"
-        >
-          <FiArrowLeft /> Back to products
-        </button>
+    <div className="min-h-screen bg-gray-900 text-gray-100">
+      {/* Padding to clear mobile top bar (from Sidebar) */}
+      <div className="pt-20 md:pt-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Back Button */}
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 mb-8 text-gray-400 hover:text-[#4DF2C0] transition-colors text-sm sm:text-base font-medium"
+          >
+            <FiArrowLeft className="text-xl" />
+            Back to products
+          </button>
 
-        {/* MAIN SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-gray-800 border border-gray-700 rounded-2xl p-6">
-          {/* IMAGE GALLERY */}
-          <div>
-            <div className="h-105 rounded-xl overflow-hidden border border-gray-700 mb-4">
-              <img
-                src={product.images[activeImage]}
-                alt={product.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Main Product Card */}
+          <div className="bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* PRODUCT DETAILS - First on mobile */}
+              <div className="p-6 sm:p-8 lg:p-10 flex flex-col order-2 lg:order-0">
+                {/* Title */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 text-gray-100">
+                  {product.title}
+                </h1>
 
-            <div className="flex gap-3 overflow-x-auto">
-              {product.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt="preview"
-                  onClick={() => setActiveImage(index)}
-                  className={`h-20 w-20 object-cover rounded-lg border cursor-pointer ${
-                    activeImage === index
-                      ? "border-[#4DF2C0]"
-                      : "border-gray-600"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+                {/* Brand & Category */}
+                <p className="text-gray-400 text-sm sm:text-base mb-4">
+                  <span className="text-gray-200 font-medium">{product.brand || "Unknown Brand"}</span>
+                  {" • "}
+                  <span className="capitalize">{product.category}</span>
+                </p>
 
-          {/* PRODUCT DETAILS */}
-          <div className="flex flex-col">
-            {/* Title */}
-            <h1 className="text-4xl font-bold mb-2">{product.title}</h1>
+                {/* Rating & Stock */}
+                <div className="flex flex-wrap items-center gap-4 mb-6">
+                  <div className="flex items-center gap-1.5 text-yellow-400">
+                    <FiStar className="text-lg sm:text-xl" />
+                    <span className="font-semibold text-base sm:text-lg">
+                      {product.rating}
+                    </span>
+                    <span className="text-gray-500 text-sm">/ 5</span>
+                  </div>
 
-            {/* Brand & Category */}
-            <p className="text-gray-400 mb-4">
-              Brand: <span className="text-gray-200">{product.brand}</span> •{" "}
-              <span className="capitalize">{product.category}</span>
-            </p>
+                  <span
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium border ${
+                      product.stock > 0
+                        ? "bg-green-900/50 text-green-400 border-green-800"
+                        : "bg-red-900/50 text-red-400 border-red-800"
+                    }`}
+                  >
+                    {product.stock > 0 ? `In Stock (${product.stock})` : "Out of Stock"}
+                  </span>
+                </div>
 
-            {/* Rating & Stock */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="flex items-center gap-1 text-yellow-400">
-                <FiStar />
-                <span>{product.rating}</span>
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4DF2C0]">
+                      ${product.price}
+                    </span>
+                    {product.discountPercentage > 0 && (
+                      <span className="text-lg sm:text-xl text-green-400 font-medium">
+                        {product.discountPercentage}% OFF
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="mb-10 flex-1">
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base lg:text-lg">
+                    {product.description}
+                  </p>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="flex-1 px-6 py-4 bg-[#4DF2C0] text-gray-900 font-bold rounded-xl hover:bg-[#3ae0b0] active:scale-95 transition-all duration-200 shadow-lg text-base sm:text-lg">
+                    Add to Cart
+                  </button>
+                  <button className="flex-1 px-6 py-4 border border-gray-600 text-gray-200 font-medium rounded-xl hover:bg-gray-700 active:scale-95 transition-all duration-200 text-base sm:text-lg">
+                    Add to Wishlist
+                  </button>
+                </div>
               </div>
 
-              <span
-                className={`text-sm px-3 py-1 rounded-full ${
-                  product.stock > 0
-                    ? "bg-green-900/40 text-green-400"
-                    : "bg-red-900/40 text-red-400"
-                }`}
-              >
-                {product.stock > 0 ? "In Stock" : "Out of Stock"}
-              </span>
-            </div>
+              {/* IMAGE GALLERY - Second on mobile */}
+              <div className="relative order-1 lg:order-0">
+                {/* Main Image */}
+                <div className="aspect-square sm:aspect-auto sm:h-125 lg:h-full overflow-hidden bg-gray-900">
+                  <img
+                    src={product.images[activeImage]}
+                    alt={product.title}
+                    className="w-full h-full object-contain sm:object-cover bg-black/50"
+                  />
+                </div>
 
-            {/* Price */}
-            <div className="mb-6">
-              <p className="text-3xl font-bold">
-                ${product.price}
-                <span className="text-sm ml-3 text-green-400">
-                  {product.discountPercentage}% OFF
-                </span>
-              </p>
-            </div>
-
-            {/* Description */}
-            <p className="text-gray-300 leading-relaxed mb-8">
-              {product.description}
-            </p>
-
-            {/* CTA */}
-            <div className="flex gap-4 mt-auto">
-              <button className="flex-1 px-6 py-3 bg-[#4DF2C0] text-black font-semibold rounded-lg hover:opacity-90">
-                Add to Cart
-              </button>
-
-              <button className="flex-1 px-6 py-3 border border-gray-600 rounded-lg hover:bg-gray-700">
-                Add to Wishlist
-              </button>
+                {/* Thumbnail Gallery */}
+                {product.images.length > 1 && (
+                  <div className="p-4 bg-gray-800 border-t border-gray-700">
+                    <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
+                      {product.images.map((img, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setActiveImage(index)}
+                          className={`shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border-2 transition-all ${
+                            activeImage === index
+                              ? "border-[#4DF2C0] ring-2 ring-[#4DF2C0]/30"
+                              : "border-gray-600 hover:border-gray-500"
+                          }`}
+                        >
+                          <img
+                            src={img}
+                            alt={`Preview ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* EXTRA DETAILS */}
-        <div className="mt-10 bg-gray-800 border border-gray-700 rounded-2xl p-6">
-          <h2 className="text-2xl font-bold mb-6">Product Information</h2>
+          {/* Extra Product Information */}
+          <div className="mt-10 bg-gray-800 border border-gray-700 rounded-2xl p-6 sm:p-8">
+            <h2 className="text-xl sm:text-2xl font-bold mb-6 text-gray-100">Product Details</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-300">
-            <div>
-              <p className="text-gray-400">Brand</p>
-              <p>{product.brand}</p>
-            </div>
-
-            <div>
-              <p className="text-gray-400">Category</p>
-              <p className="capitalize">{product.category}</p>
-            </div>
-
-            <div>
-              <p className="text-gray-400">Stock Available</p>
-              <p>{product.stock} units</p>
-            </div>
-
-            <div>
-              <p className="text-gray-400">Rating</p>
-              <p>{product.rating} / 5</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-300">
+              <div className="space-y-1">
+                <p className="text-gray-500 text-sm">Brand</p>
+                <p className="font-medium">{product.brand || "N/A"}</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-gray-500 text-sm">Category</p>
+                <p className="font-medium capitalize">{product.category}</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-gray-500 text-sm">Availability</p>
+                <p className="font-medium">
+                  {product.stock > 0 ? `${product.stock} units in stock` : "Out of stock"}
+                </p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-gray-500 text-sm">Customer Rating</p>
+                <p className="font-medium">{product.rating} out of 5</p>
+              </div>
             </div>
           </div>
         </div>

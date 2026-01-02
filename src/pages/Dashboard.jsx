@@ -1,7 +1,5 @@
 import { useContext, useState } from "react";
-import {
-  FaSearch,
-} from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 import { IoMdAdd } from "react-icons/io";
 import { AuthContext } from "../context/authContext";
@@ -15,7 +13,8 @@ const Dashboard = () => {
   const [addProductOn, setAddProductOn] = useState(false);
   const [categoryValue, setCategoryValue] = useState("All");
   const [productSearch, setProductSearch] = useState("");
-  const { updateProduct, setUpdateProduct, editOn, setEditOn } = useContext(AuthContext);
+  const { updateProduct, setUpdateProduct, editOn, setEditOn } =
+    useContext(AuthContext);
   const queryClient = useQueryClient();
 
   const addProduct = (newProduct) => {

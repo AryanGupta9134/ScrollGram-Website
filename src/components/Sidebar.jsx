@@ -34,7 +34,7 @@ const Sidebar = () => {
             <div className="text-4xl text-[#4DF2C0]">
               <Logo />
             </div>
-            <p className="hidden sm:block text-sm text-gray-400 truncate max-w-[140px]">
+            <p className="hidden sm:block text-sm text-gray-400 truncate max-w-35">
               Hello, {fName}
             </p>
           </div>

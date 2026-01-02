@@ -30,6 +30,8 @@ const AuthProvider = ({ children }) => {
   // ✅ WISHLIST STATE
   const [wishlist, setWishlist] = useState([]);
 
+  const [editOn, setEditOn] = useState(false);
+
   // ➕ Add to wishlist
   const addToWishlist = (product) => {
     setWishlist((prev) => {
@@ -119,6 +121,8 @@ const AuthProvider = ({ children }) => {
         increaseQty,
         decreaseQty,
         removeFromCart,
+        editOn,
+        setEditOn,
       }}
     >
       {children}

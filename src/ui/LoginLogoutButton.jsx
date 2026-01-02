@@ -11,7 +11,7 @@ const LoginLogoutButton = () => {
       onClick={() => (user ? setUser(false) : navigate("/login"))}
       className="px-6 py-2 rounded-full border border-white/30 text-sm font-medium text-white hover:bg-gray-300 hover:text-black transition"
     >
-      {user ? "Logout" : "Sign-In"}
+      {user.isAuthenticated ? "Logout" : "Sign-In"}
     </button>
   );
 };

@@ -76,17 +76,22 @@ const ProductsList = ({ productSearch, categoryValue }) => {
   const isInWishlist = (id) => wishlist.some((item) => item.id === id);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="space-y-8">
+    <div className="p-4 sm:p-6 max-w-6xl mx-auto">
+      <div className="space-y-6 sm:space-y-8">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-700"
+            className="bg-gray-800 rounded-xl shadow-lg overflow-hidden 
+                       hover:shadow-2xl transition-shadow duration-300 
+                       border border-gray-700 cursor-pointer"
             onClick={() => navigate(`/product/${product.id}`)}
           >
             <div className="flex flex-col md:flex-row">
               {/* Product Image */}
-              <div className="md:w-96 h-80 md:h-auto">
+              <div
+                className="w-full md:w-80 lg:w-96 
+                              h-56 sm:h-64 md:h-auto shrink-0"
+              >
                 <img
                   src={product.thumbnail}
                   alt={product.title}
@@ -95,43 +100,48 @@ const ProductsList = ({ productSearch, categoryValue }) => {
               </div>
 
               {/* Product Details */}
-              <div className="flex flex-col p-8 w-full">
+              <div className="flex flex-col p-4 sm:p-6 md:p-8 w-full">
                 {/* TOP ROW */}
-                <div className="flex justify-between items-start mb-4">
-                  {/* Left */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-100">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-100">
                       {product.title}
                     </h3>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-xs sm:text-sm text-gray-400 mt-1">
                       by {product.brand || "Unknown Brand"}
                     </p>
                   </div>
 
-                  {/* RIGHT TOP - Category */}
-                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs font-semibold rounded-full border border-blue-800">
+                  <span
+                    className="self-start px-3 py-1 bg-blue-900/50 
+                                   text-blue-300 text-xs font-semibold 
+                                   rounded-full border border-blue-800"
+                  >
                     {product.category}
                   </span>
                 </div>
 
                 {/* Price */}
-                <div className="mb-6">
-                  <span className="text-3xl font-bold text-gray-100">
+                <div className="mb-4 sm:mb-6">
+                  <span className="text-2xl sm:text-3xl font-bold text-gray-100">
                     ${product.price}
                   </span>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-300 mb-6 leading-relaxed">
+                <p className="text-gray-300 mb-6 leading-relaxed text-sm sm:text-base line-clamp-3 sm:line-clamp-none">
                   {product.description}
                 </p>
 
                 {/* BOTTOM ROW */}
-                <div className="flex justify-between items-center mt-auto">
-                  {/* LEFT BOTTOM - Actions */}
-                  <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mt-auto">
+                  {/* LEFT ACTIONS */}
+                  <div className="flex flex-wrap gap-3">
                     <button
-                      className="px-6 py-3 bg-blue-500 text-gray-900 rounded-lg hover:bg-[#4DF2C0] transition font-medium"
+                      className="px-4 sm:px-6 py-2.5 sm:py-3 
+                                 bg-blue-500 text-gray-900 
+                                 rounded-lg hover:bg-[#4DF2C0] 
+                                 transition font-medium text-sm sm:text-base"
                       onClick={(e) => {
                         e.stopPropagation();
                         addToCart(product);
@@ -141,33 +151,39 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                     </button>
 
                     <button
-                      className="px-6 py-3 border border-gray-600 rounded-lg hover:bg-red-600 transition"
+                      className="px-4 sm:px-6 py-2.5 sm:py-3 
+                                 border border-gray-600 
+                                 rounded-lg hover:bg-red-600 
+                                 transition text-sm sm:text-base"
                       onClick={(e) => {
-                        e.stopPropagation(); // 🔥 prevents unwanted navigation
+                        e.stopPropagation();
                         removeProduct(product.id);
                       }}
                     >
-                      Remove Product
+                      Remove
                     </button>
                   </div>
 
-                  {/* RIGHT BOTTOM - Edit */}
-                  <div className="flex gap-4">
+                  {/* RIGHT ACTIONS */}
+                  <div className="flex gap-4 justify-end">
                     <button
                       className={`transition ${
                         isInWishlist(product.id) ? "text-red-500" : "text-white"
                       } hover:text-red-500`}
                       onClick={(e) => {
-                        e.stopPropagation(); // 🔥 prevents unwanted navigation
+                        e.stopPropagation();
                         addToWishlist(product);
                       }}
                     >
                       <FaHeart className="text-xl" />
                     </button>
+
                     <button
-                      className="border border-blue-500 p-2 rounded-full hover:border-[#4DF2C0] transition text-blue-500 hover:text-[#4DF2C0]"
+                      className="border border-blue-500 p-2 rounded-full 
+                                 hover:border-[#4DF2C0] transition 
+                                 text-blue-500 hover:text-[#4DF2C0]"
                       onClick={(e) => {
-                        e.stopPropagation(); // 🔥 prevents unwanted navigation
+                        e.stopPropagation();
                         handleEditProduct(product);
                       }}
                     >

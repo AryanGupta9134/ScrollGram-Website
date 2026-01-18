@@ -16,9 +16,9 @@ const ProductsList = ({ productSearch, categoryValue }) => {
   const {
     setUpdateProduct,
     setEditingProduct,
-    addToWishlist,
     wishlist,
     addToCart,
+    toggleWishlist,
   } = useContext(AuthContext);
 
   const {
@@ -172,7 +172,7 @@ const ProductsList = ({ productSearch, categoryValue }) => {
                       } hover:text-red-500`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        addToWishlist(product);
+                        toggleWishlist(product);
                       }}
                     >
                       <FaHeart className="text-xl" />

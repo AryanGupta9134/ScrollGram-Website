@@ -46,6 +46,21 @@ const AuthProvider = ({ children }) => {
     setWishlist((prev) => prev.filter((item) => item.id !== id));
   };
 
+  // Toggle wishlist item
+  const toggleWishlist = (product) => {
+  const exists = wishlist.some((item) => item.id === product.id);
+
+  if (exists) {
+    // REMOVE
+    setWishlist((prev) =>
+      prev.filter((item) => item.id !== product.id)
+    );
+  } else {
+    // ADD
+    setWishlist((prev) => [...prev, product]);
+  }
+};
+
   // ✅ CART STATE
   const [cart, setCart] = useState([]);
 
@@ -123,6 +138,7 @@ const AuthProvider = ({ children }) => {
         removeFromCart,
         editOn,
         setEditOn,
+        toggleWishlist,
       }}
     >
       {children}

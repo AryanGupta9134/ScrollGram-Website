@@ -27,6 +27,20 @@ const AuthProvider = ({ children }) => {
   // 🔹 WHICH product is being edited (IMPORTANT)
   const [editingProduct, setEditingProduct] = useState(null);
 
+  // Reset product form data
+  const resetProductForm = () => {
+  setProductAddFormData({
+    title: "",
+    description: "",
+    price: "",
+    category: "",
+    brand: "",
+    thumbnail: "",
+  });
+  setUpdateProduct(false);
+  setEditingProduct(null);
+};
+
   // ✅ WISHLIST STATE
   const [wishlist, setWishlist] = useState([]);
 
@@ -139,6 +153,7 @@ const AuthProvider = ({ children }) => {
         editOn,
         setEditOn,
         toggleWishlist,
+        resetProductForm,
       }}
     >
       {children}

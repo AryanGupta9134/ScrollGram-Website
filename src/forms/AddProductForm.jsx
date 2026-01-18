@@ -10,6 +10,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
     editingProduct,
     setUpdateProduct,
     setEditingProduct,
+    resetProductForm,
   } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -23,12 +24,12 @@ const AddProductForm = ({ closeForm, addProduct }) => {
   useEffect(() => {
     if (updateProduct && editingProduct) {
       setProductAddFormData({
-        title: editingProduct.title,
-        description: editingProduct.description,
-        price: editingProduct.price,
-        category: editingProduct.category,
-        brand: editingProduct.brand,
-        thumbnail: editingProduct.thumbnail,
+        title: editingProduct.title || "",
+        description: editingProduct.description || "",
+        price: editingProduct.price || "",
+        category: editingProduct.category || "",
+        brand: editingProduct.brand || "",
+        thumbnail: editingProduct.thumbnail || "",
       });
     }
   }, [updateProduct, editingProduct, setProductAddFormData]);
@@ -48,7 +49,7 @@ const AddProductForm = ({ closeForm, addProduct }) => {
     } else {
       // ➕ ADD PRODUCT
       const newProduct = {
-        id: Crypto.randomUUID(),
+        id: crypto.randomUUID(),
         ...productAddFormData,
       };
       addProduct(newProduct);
@@ -146,7 +147,10 @@ const AddProductForm = ({ closeForm, addProduct }) => {
         <div className="flex justify-end gap-3 pt-4">
           <button
             type="button"
-            onClick={closeForm}
+            onClick={() => {
+              resetProductForm();
+              closeForm();
+            }}
             className="px-5 py-2 rounded-lg border border-gray-600 hover:bg-gray-800"
           >
             Cancel

@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [addProductOn, setAddProductOn] = useState(false);
   const [categoryValue, setCategoryValue] = useState("All");
   const [productSearch, setProductSearch] = useState("");
-  const { updateProduct, setUpdateProduct, editOn, setEditOn } =
+  const { updateProduct, setUpdateProduct, editOn, setEditOn, setEditingProduct, setProductAddFormData } =
     useContext(AuthContext);
   const queryClient = useQueryClient();
 
@@ -104,7 +104,20 @@ const Dashboard = () => {
               {/* Bottom Row: Add Item Button - Centered on mobile */}
               <div className="flex justify-center sm:justify-end">
                 <button
-                  onClick={() => setAddProductOn(true)}
+                  onClick={() => {
+  setUpdateProduct(false);
+  setEditingProduct(null);
+  setProductAddFormData({
+    title: "",
+    description: "",
+    price: "",
+    category: "",
+    brand: "",
+    thumbnail: "",
+  });
+  setAddProductOn(true);
+}}
+
                   className="
             flex items-center justify-center gap-2
             w-full xs:w-auto

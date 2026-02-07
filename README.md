@@ -23,7 +23,7 @@ ScrollGram is a frontend-only Instagram-like product scrolling website where use
 
 - Frontend-only application
 - No real backend or database
-- Focused on UI/UX, state management, and performance.
+- Focused on UI/UX, state management, and performance
 
 ## 🚀 Getting Started
 

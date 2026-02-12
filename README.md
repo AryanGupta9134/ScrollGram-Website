@@ -46,4 +46,3 @@ This project was built to practice:
 ## External Packages
 
 For UI - Styles Components(Uiverse.io)
-For image upload button - .....
